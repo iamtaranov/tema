@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <div class="container card card-login">
+
+        <h3 class="card-login_title">Авторизация</h3>
+
+        <form action="{{ path('user_login') }}" method="POST">
+
+            <div class="form-group">
+                <label class="required">Логин</label>
+                <input type="text" name="_username" value="{{ last_username }}" class="form-control" required="required">
+            </div>
+
+            <div class="form-group">
+                <label class="required">Пароль</label>
+                <input type="password" name="_password" class="form-control" required="required">
+            </div>
+
+            <label class="form-check form-checkbox">
+                <input type="checkbox" name="_remember_me">
+                <span class="mark"></span>
+                Запомнить меня
+            </label>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-round btn-center" value="Войти">
+            </div>
+
+        </form>
+
+        <p class="card-login_special-links"><a href="{{ path('user_registration') }}">Регистрация</a> &nbsp; <a href="/remind">Забыли пароль?</a></p>
+
+    </div>
+{% endblock %}

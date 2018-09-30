@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container card">
+
+        <div class="header">
+
+            <h1 class="header_title">Тема</h1> <span class="header_subtitle">простые опросы</span>
+
+        </div>
+
+        {% include 'block/nav.html.twig' %}
+
+        <form name="form" method="post" class="hide-required">
+        
+            {{ form_widget(form.main) }}
+
+            <ul id="survey-editor_sortable" class="survey-editor_sortable">
+                {% if form.items is defined %}
+                    {% for item in form.items -%}
+                        <li class="item">
+                            {{ form_row(item) }}
+                        </li>
+                    {%- endfor -%}
+
+                {% endif %}
+            </ul>
+            <div id="survey-editor_sortable-empty" class="survey-editor_sortable">
+                <p class="text-center">Добавляйте новые вопросы нажатием кнопок в плавающем окне справа</p>
+            </div>
+
+            <input type="submit" class="btn" value="Сохранить">
+
+        </form>
+
+    </div>
+
+    <div class="survey-editor_helper">
+        <ul class="tpl-items">
+            <li class="tpl_item btn_tpl" data-tpl="text"></li>
+            <li class="tpl_item btn_tpl" data-tpl="textarea"></li>
+            <li class="tpl_item btn_tpl" data-tpl="radio"></li>
+            <li class="tpl_item btn_tpl" data-tpl="checkbox"></li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/sortable.min.js') }}"></script>
+    <script src="{{ asset('assets/js/autosize.min.js') }}"></script>
+    <script src="{{ asset('assets/js/functions.js') }}"></script>
+    <script src="{{ asset('assets/js/surveyEditor.js') }}"></script>
+{% endblock %}

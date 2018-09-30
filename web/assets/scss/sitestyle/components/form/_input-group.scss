@@ -1,0 +1,43 @@
+
+.input-group {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.input-group_prepend,
+.input-group_append {
+	display: flex;
+
+	& + .form-control {
+		width: 1%;
+		flex: 1 1 auto;
+	}
+}
+
+.input-group_prepend {
+
+	.input-group_text {
+		padding-right: 15px;
+	}
+}
+
+.input-group_append {
+
+	.input-group_text {
+		padding-left: 15px;
+	}
+}
+
+.input-group_text, .input-group_img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid transparent;
+}
+
+.input-group_img {
+	height: 20px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	box-sizing: content-box;
+}

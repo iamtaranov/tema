@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container card">
+
+        <h1 class="survey-form_title">{{ survey.title }}</h1>
+        <p class="survey-form_subtitle">{{ survey.description }}</p>
+
+        {% include 'block/nav.html.twig' %}
+
+        {% for key, answers in survey.answers.items %}
+            <div class="spoiler survey_spoiler">
+                <div class="spoiler_title">Ответ №{{ key }}</div>
+                <div class="spoiler_content">
+                    {% for answer in answers %}
+                        <div class="survey_answer">
+                            <p class="survey-answer_title">{{ answer.title }}</p>
+                            <div class="survey-answer_data">
+                                {% if answer.data is iterable %}
+                                    <ul>
+                                    {% for option in answer.data %}
+                                        <li>{{ option }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    {{ answer.data }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .spoiler {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+        }
+
+        .spoiler_title {
+            padding: 6px 10px 5px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .spoiler_content {
+            padding: 10px;
+            display: none;
+            border-top: 1px solid #dbdbdb;
+        }
+
+        .spoiler.active .spoiler_content {
+            display: block;
+        }
+
+        /* survey_answer */
+
+        .survey_answer {
+            margin-top: .75rem;
+            margin-bottom: .75rem;
+        }
+
+        .survey_answer:first-child {
+            margin-top: 0;
+        }
+
+        .survey_answer:last-child {
+            margin-bottom: 0;
+        }
+
+        .survey-answer_title {
+            margin-bottom: 0;
+            font-weight: bold;
+        }
+
+        .survey-answer_data ul {
+            margin-bottom: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function setClickListeners(selector, callback)
+        {
+            [].forEach.call(selector, function(item)
+            {
+                item.addEventListener("click", function() { callback(item) });
+            });
+        }
+
+        setClickListeners(document.querySelectorAll(".spoiler_title"), function (btn) {
+            btn.parentNode.classList.toggle("active");
+        });
+    </script>
+{% endblock %}

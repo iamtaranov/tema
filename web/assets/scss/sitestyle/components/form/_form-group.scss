@@ -1,0 +1,17 @@
+
+.form-group {
+	margin-top: 1.25rem;
+	margin-bottom: 1.25rem;
+
+	label {
+		margin-bottom: 0;
+
+		&.required {
+
+			&:after {
+				content: ' *';
+				color: red;
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+<div class="nav nav-main">
+
+    <ul class="nav-items">
+
+        {#'user_homepage': 'Профиль',#}
+
+        {% set nav_items = {
+            'homepage': 'Главная',
+            'user_survey_create': 'Создать опрос',
+            'user_survey': 'Мои опросы'
+        } %}
+
+        {% for key,value in nav_items %}
+            <li class="nav_item"><a href="{{ path(key) }}" class="nav_link {% if app.request.get('_route') == key %}active{% endif %}">{{ value }}</a></li>
+        {% endfor %}
+
+    </ul>
+
+</div>

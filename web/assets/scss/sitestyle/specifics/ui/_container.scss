@@ -1,0 +1,33 @@
+
+.container {
+
+	&.card {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		overflow-x: hidden;
+	}
+
+	&.card-login {
+		width: 360px;
+	}
+}
+
+@media (max-width: $grid-breakpoints-sm + px) {
+
+	.container {
+
+		&.card {
+			padding-left: 15px;
+			padding-right: 15px;
+			-webkit-border-radius: 0;
+			-moz-border-radius: 0;
+			border-radius: 0;
+			box-shadow: none;
+		}
+
+		&.card-login {
+			width: 100%;
+		}
+	}
+
+}

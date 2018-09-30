@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container card card-login">
+
+        <h3 class="card-login_title">Регистрация</h3>
+
+        <h4>Регистрация временно откючена</h4>
+
+        {#
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+        #}
+
+        <p class="card-login_special-links"><a href="{{ path('user_login') }}">Уже есть аккаунт?</a></p>
+
+    </div>
+{% endblock %}

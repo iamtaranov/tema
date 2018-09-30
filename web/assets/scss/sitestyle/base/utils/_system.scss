@@ -1,0 +1,21 @@
+
+
+@function getPrefix($feature, $useModernizr: true) {
+	$yesPrefix: '';
+	$noPrefix: '';
+	@if $useModernizr {
+		$yesPrefix: '.' + $feature;
+		$noPrefix: '.no-' + $feature;
+	}
+	@return (yes: $yesPrefix, no: $noPrefix);
+}
+
+@function lighter($color, $tone) {
+	$adjust: 16*$tone;
+	@return adjust-color($color, $red: $adjust, $green: $adjust, $blue: $adjust);
+}
+
+@function darker($color, $tone) {
+	$adjust: -16*$tone;
+	@return adjust-color($color, $red: $adjust, $green: $adjust, $blue: $adjust);
+}

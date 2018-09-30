@@ -1,0 +1,39 @@
+
+{% block editor_required_checkbox %}
+    <label class="form-check form-checkbox item_required">
+        <input type="checkbox" name="form[items][{{ form.vars.name }}][required]" {% if form.vars.required is defined and form.vars.required %}checked="checked"{% endif %}>
+        <span class="mark"></span>
+        Обязательный вопрос
+    </label>
+{% endblock %}
+
+{% block spedial_editor_widget %}
+    <input type="hidden" name="form[items][{{ form.vars.name }}][type]" value="{{ form.vars.type }}">
+    <span class="btn_delete-item"></span>
+{% endblock %}
+
+{% block text_editor_widget %}
+    {{ block('editor_required_checkbox') }}
+    {{ form_widget(form, {'full_name' : 'form[items][' ~ form.vars.name ~ '][title]'}) }}
+    {{ block('spedial_editor_widget') }}
+{% endblock %}
+
+{% block choice_editor_item_widget %}
+    <input type="text" name="form[items][{{ form.vars.name }}][options][{% if child.vars.label is defined and child.vars.label %}{{ child.vars.label }}{% elseif form.vars.label is defined and form.vars.label %}{{ form.vars.label }}{% endif %}]" class="form-control" autocomplete="off" placeholder="Вариант ответа" required="" value="{% if child.vars.value is defined %}{{ child.vars.value }}{% else %}{{ form.vars.data }}{% endif %}">
+    <span class="btn_delete-item"></span>
+{% endblock %}
+
+{% block choice_editor_widget %}
+    {{ block('editor_required_checkbox') }}
+    <input type="text" name="form[items][{{ form.vars.name }}][title]" class="form-control" autocomplete="off" placeholder="Заголовок" required="" value="{{ form.vars.data }}">
+    {{ block('spedial_editor_widget') }}
+    <ol>
+        {%- for child in form %}
+            <li>
+            {{ block('choice_editor_item_widget') }}
+            </li>
+        {%- endfor -%}
+    </ol>
+    <p class="btn_create-item btn_tpl" data-tpl="selectable_item" data-key="{{ form.vars.name }}">Добавить вариант ответа</p>
+    {#{{ dump(form) }}#}
+{% endblock %}

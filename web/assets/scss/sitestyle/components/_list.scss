@@ -1,0 +1,16 @@
+
+ul, ol {
+	padding-left: 1.5em;
+
+	&.list-inline {
+		margin-bottom: 0;
+		padding-left: 0;
+
+		list-style: none;
+
+		li {
+			margin-right: 1em;
+			display: inline-block;
+		}
+	}
+}

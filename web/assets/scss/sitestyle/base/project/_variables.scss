@@ -1,0 +1,36 @@
+
+// background
+$background-main: #E5E5E5;//#eee
+
+// font colors
+$color-main-light: #484848;
+$color-main: #212121;
+$color-main-dark: #000000;
+
+// element colors
+$primary-color: #1976d2;
+$primary-color-dark: #1565c0;
+
+// Font
+$base-line-height: 1.5;
+$base-font-size: 16;
+$base-font-family: Arial, Helvetica, sans-serif;//Arial, "Helvetica Neue", Helvetica, sans-serif
+
+// Headings
+$headings-line-height: 1.15;
+$headings-font-weight: 500;
+$headings-font-family: Georgia, serif;//Georgia, Times, "Times New Roman", serif;
+
+$h1-font-size: $base-font-size * 2.25;
+$h2-font-size: $base-font-size * 2;
+$h3-font-size: $base-font-size * 1.75;
+$h4-font-size: $base-font-size * 1.5;
+$h5-font-size: $base-font-size * 1.25;
+$h6-font-size: $base-font-size * 1;
+
+// grid
+
+$grid-breakpoints-sm: 576;
+$grid-breakpoints-md: 768;
+
+

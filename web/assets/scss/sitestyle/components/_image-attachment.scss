@@ -1,0 +1,11 @@
+
+.image-attachment {
+	margin-top: 1.25rem;
+	margin-bottom: 1.25rem;
+
+	& > h4 {
+		color: $color-main-light;
+		@include fontSize($h6-font-size);
+		text-align: center;
+	}
+}

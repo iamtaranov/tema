@@ -1,0 +1,30 @@
+
+.header {
+	//border-bottom: 1px solid $color-main;
+
+	a {
+		color: $color-main;
+	}
+}
+
+.header_title {
+	margin-top: 0;
+	margin-bottom: 0;
+	display: inline-block;
+	//@include fontSize(40);
+	font-weight: $headings-font-weight;
+	font-family: $headings-font-family;
+
+	&::after {
+		content: '\00a0';
+	}
+
+	&:hover {
+		border-bottom: 0;
+	}
+
+	&:hover,
+	&:active {
+		text-decoration: none;
+	}
+}

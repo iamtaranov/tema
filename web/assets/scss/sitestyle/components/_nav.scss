@@ -1,0 +1,50 @@
+
+.nav {
+	padding: .75rem 15px;
+	background: $primary-color;
+}
+
+.nav-items {
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+.nav_item {
+	margin-bottom: 1px;
+	display: inline-block;
+}
+
+.nav_link {
+	padding: 6px 14px;
+	display: block;
+	color: #fff;
+	@include fontSize(12);
+	line-height: 24px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+
+	&:hover,
+	&:active {
+		color: #fff;
+		text-decoration: none;
+	}
+
+	&.active {
+		background: rgba(255,255,255,.2);
+	}
+}
+
+@media (max-width: $grid-breakpoints-sm + px) {
+
+	.nav_item {
+		display: block;
+	}
+
+	.nav_link {
+		text-align: center;
+	}
+
+}

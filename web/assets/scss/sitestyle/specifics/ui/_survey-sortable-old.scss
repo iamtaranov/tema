@@ -1,0 +1,298 @@
+
+.survey-editor_sortable {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+
+	& + .survey-editor_sortable {
+		display: none;
+	}
+
+	&:empty {
+
+		& + .survey-editor_sortable {
+			padding: 15px 0;
+			text-align: center;
+			display: block;
+		}
+	}
+
+	.item {
+
+		&.ui-sortable-handle {
+			cursor: move;
+			border-right: 5px solid $primary-color;
+
+			&:first-child {
+
+				.form-group {
+					margin-top: 0;
+				}
+			}
+		}
+
+		&.ui-sortable-helper {
+			background-color: rgba(255, 255, 255, .8);
+
+			.form-group {
+				margin-top: 0;
+			}
+
+			.delete-btn {
+				right: -15px !important;
+			}
+		}
+
+		.form-group {
+
+			ol {
+				margin-top: .75rem;
+				margin-bottom: .75rem;
+			}
+
+			li {
+				margin-top: 5px;
+
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+
+			&, & ol {
+				overflow: hidden;
+			}
+
+			&, & li {
+				position: relative;
+			}
+
+			.delete-btn {
+				padding: .7rem;
+				display: block;
+				cursor: pointer;
+				position: absolute;
+				top: 0;
+				right: -25px;
+				transition: right .2s ease;
+				background: url("../img/emoji/64x64/2716.png") no-repeat center, transparent;
+				background-size: 1rem;
+
+				&.delete-subitem {
+					top: 4px;
+				}
+			}
+
+			input {
+				width: 100%;
+				display: inline-block;
+				transition: padding-right .2s ease;
+			}
+
+			&:hover {
+
+				input {
+					padding-right: 22px;
+				}
+
+				.delete-btn {
+					right: 0px;
+
+					&:hover i {
+						color: #1976D2;
+					}
+				}
+			}
+		}
+
+		.item_required {
+			margin-top: 0;
+			margin-left: 1rem;
+			padding-left: 1.5rem;
+			display: inline-block;
+
+			.mark {
+				width: 1rem;
+				height: 1rem;
+				top: 1px;
+
+				&:after {
+					width: .3rem;
+					height: .75rem;
+					top: 0;
+				}
+			}
+		}
+
+		.item_add-new-answer {
+			margin-left: 1.5rem;
+			margin-bottom: 0;
+			font-size: 13px;
+			color: $color-main-light;
+			cursor: pointer;
+
+			&:hover {
+				color: $primary-color-dark;
+			}
+		}
+	}
+
+	.emptySpace {
+		height: 50px;
+		margin-top: 1.25rem;
+		border: 2px dashed $primary-color;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	.ui-sortable-helper:first-child + .emptySpace,
+	.ui-sortable-helper:first-child + .item.sortable > .form-group{
+		margin-top: 0;
+	}
+}
+/*
+.survey-sortable {
+	margin-top: 30px;
+	padding: 15px 0;
+
+	&:empty {
+		padding: 0;
+
+		& + .survey-sortable-empty {
+			padding: 15px 0;
+			text-align: center;
+			display: block;
+		}
+	}
+
+	.item {
+
+		&.sortable {
+			cursor: move;
+			border-right: 5px solid $primary-color;
+
+			.form-group, .selector-group {
+				margin-top: 30px;
+
+				&, & ol {
+					overflow: hidden;
+				}
+
+				&, & li {
+					position: relative;
+				}
+
+				.delete-btn {
+					color: #212121;
+					line-height: 1;//1.9
+					cursor: pointer;
+					position: absolute;
+					top: 0;
+					right: -15px;
+					transition: right .2s ease;
+
+					&.delete-subitem {
+						top: 6px;
+					}
+				}
+
+				input {
+					transition: padding-right .2s ease;
+				}
+
+				&:hover {
+
+					input {
+						padding-right: 22px;
+					}
+
+					.delete-btn {
+						right: 5px;
+
+						&:hover i {
+							color: #1976D2;
+						}
+					}
+				}
+			}
+
+			input {
+				padding-right: 5px;
+			}
+
+			&.ui-sortable-helper {
+				height: auto !important;
+				background-color: rgba(255, 255, 255, .9);
+
+				.form-group {
+					margin-top: 0;
+				}
+
+				.delete-btn {
+					right: -15px !important;
+				}
+			}
+		}
+
+		&:first-child {
+
+			.form-group, .selector-group {
+				margin-top: 0;
+			}
+		}
+	}
+
+	.emptySpace {
+		height: 50px;
+		margin-top: 30px;
+		border: 2px dashed $primary-color;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	.ui-sortable-helper:first-child + .emptySpace,
+	.ui-sortable-helper:first-child + .item.sortable > .form-group{
+		margin-top: 0;
+	}
+
+	.selector-group {
+		margin-top: 15px;
+
+		.group-title {
+			margin-bottom: 2px;
+			display: inline-block;
+		}
+
+		input {
+			margin-top: 0;
+		}
+
+		ol {
+
+			li {
+				margin-top: 5px;
+
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+
+			input {
+				display: inline-block;
+			}
+		}
+
+		.add-new-answer {
+			margin-left: .75em;
+			font-size: 13px;
+			color: #757575;
+			cursor: pointer;
+
+			&:hover {
+				color: #1976D2;
+			}
+		}
+	}
+}*/

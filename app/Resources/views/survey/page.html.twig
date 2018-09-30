@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="survey-form container card">
+
+        <h1 class="survey-form_title">{{ survey.title }}</h1>
+        <p class="survey-form_subtitle">{{ survey.description }}</p>
+
+        <div class="survey-questions" id="survey-questions">
+
+            {{ form_start(survey.form, {'attr':{'onsubmit':'return checkSurveyForm();'}}) }}
+
+            {{ form_widget(survey.form) }}
+
+            {{ form_end(survey.form) }}
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>function checkSurveyForm(){return 0!==[].slice.call(document.querySelectorAll('input[name="form[da1900fe][]"]')).filter(function(e){return e.checked}).length&&0!==[].slice.call(document.querySelectorAll('input[name="form[baf20a85][]"]')).filter(function(e){return e.checked}).length||(alert("Будь ласка, дайте відповідь на всі питання відмічені *"),!1)}</script>
+{% endblock %}
+
+{#function checkSurveyForm()
+        {
+            if ([].slice.call(document.querySelectorAll("input[name=\"form[da1900fe][]\"]")).filter(function(e) { return e.checked; }).length === 0
+                ||
+                [].slice.call(document.querySelectorAll("input[name=\"form[baf20a85][]\"]")).filter(function(e) { return e.checked; }).length === 0) {
+
+                alert('Будь ласка, дайте відповідь на всі питання відмічені *');
+
+                return false;
+            }
+
+            return true;
+        }#}

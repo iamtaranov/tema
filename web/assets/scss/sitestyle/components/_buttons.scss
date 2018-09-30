@@ -1,0 +1,60 @@
+
+.btn {
+	padding: 12px 30px;
+
+	display: block;
+
+	color: #fff;
+	font-size: .75rem;
+	line-height: 1.428571;
+	text-transform: uppercase;
+	text-decoration: none;
+
+	background-color: $primary-color;
+	border: 0 solid $primary-color;
+	-webkit-border-radius: .2rem;
+	-moz-border-radius: .2rem;
+	border-radius: .2rem;
+	box-shadow: 0 2px 2px 0 rgba($primary-color,.14),0 3px 1px -2px rgba($primary-color,.2),0 1px 5px 0 rgba($primary-color,.12);
+
+	user-select: none;
+	cursor: pointer;
+	outline: none;
+
+	transition: box-shadow .4s ease, background-color .4s ease;
+
+	&:hover,
+	&:focus,
+	&:active,
+	&:visited {
+		color: #fff;
+		text-decoration: none;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: $primary-color-dark;
+		box-shadow: 0 14px 26px -12px rgba($primary-color,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba($primary-color,.2);
+	}
+
+	&:active {
+		box-shadow: none;
+	}
+
+	&.btn-round {
+		-webkit-border-radius: 30px;
+		-moz-border-radius: 30px;
+		border-radius: 30px;
+	}
+
+	&.btn-sm {
+		padding: .40625rem 1.25rem;
+		font-size: .6875rem;
+		line-height: 1.5;
+	}
+
+	&.btn-center {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}

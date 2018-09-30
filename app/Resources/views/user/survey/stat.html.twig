@@ -1,0 +1,191 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container card">
+
+        <h1 class="survey-form_title">{{ survey.title }}</h1>
+        <p class="survey-form_subtitle">{{ survey.description }}</p>
+
+        <div class="survey_stat-item">
+            <h4>Количество ответов</h4>
+            <canvas class="survey_stat-chart" id="chart_times" width="100%" height="40"></canvas>
+        </div>
+
+        {% for key, item in survey.statistics.detailed %}
+            <div class="survey_stat-item">
+                <h4>{{ item.title }}</h4>
+                <canvas class="survey_stat-chart" id="chart_{{ key }}" width="100%" height="15"></canvas>
+            </div>
+        {% endfor %}
+
+        <style>
+        </style>
+
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="{{ asset('assets/js/functions.js') }}"></script>
+    <script>
+        var statistics = {{ survey.statistics|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw }};
+
+        window.onload = function() {
+
+            var color = getRandomHEXColor();
+
+            new Chart(document.getElementById('chart_times').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: array_keys(statistics.general.times),
+                    datasets: [{
+                        label: 'Количество ответов',
+                        backgroundColor: color,
+                        borderColor: color,
+                        fill: false,
+                        data: array_values(statistics.general.times)
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                min: array_values(statistics.general.times).min() - 1,
+                                max: array_values(statistics.general.times).max() + 1,
+                                stepSize: 1,
+                                callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+        Object.keys(statistics.detailed).map(function(key)
+        {
+            var item = statistics.detailed[key];
+
+            var chart = {
+                canvas: document.getElementById('chart_' + key).getContext('2d'),
+                height: 15,
+                type: 'bar',
+                labels: [],
+                datasets: [],
+                options: []
+            };
+
+            if (typeof item.data === 'object')
+            {
+                chart.labels = array_keys(item.data);
+                chart.height = 40;
+
+                chart.datasets = [{
+                    label: 'Количество ответов',
+                    backgroundColor: getRandomColors(chart.labels.length),
+                    borderWidth: 1,
+                    data: array_values(item.data)
+                }];
+
+                chart.options = {
+                    legend: { display: false },
+                    scales: {
+                        yAxes: [{ ticks: { beginAtZero: true } }]
+                    }
+                };
+            }
+            else
+            {
+                chart.type = 'horizontalBar';
+
+                chart.datasets = [{
+                    label: 'Количество ответов',
+                    backgroundColor: getRandomColor(),
+                    data: [item.data]
+                }];
+
+                chart.options = {
+                    legend: { display: false },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                max: 7
+                            }
+                        }]
+                    }
+                };
+            }
+
+            console.log(chart);
+
+            chart.canvas.canvas.height = chart.height;
+
+            new Chart(chart.canvas, {
+                type: chart.type,
+                data: {
+                    labels: chart.labels,
+                    datasets: chart.datasets
+                },
+                options: chart.options,
+            });
+        });
+
+        /*var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: ["Red"],
+                datasets: [{
+                    label: '# of Votes',
+                    backgroundColor: 'blue',
+                    stack: 0,
+                    data: [12],
+                    borderWidth: 1
+                }, {
+                    label: '# of Q',
+                    backgroundColor: 'red',
+                    stack: 0,
+                    data: [19],
+                    borderWidth: 1
+                }]
+            }
+        });*/</script>
+
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.min.js"></script>#}
+    {#<script>
+        var data = {{ survey.stat|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw }};
+
+        Object.keys(data).map(function(key)
+        {
+            var item = data[key];
+
+            if (typeof item.data === 'object')
+            {
+
+                new Chartist.Bar('.chart_' + key, {"labels":array_keys(item.data),"series":array_values(item.data)}, {distributeSeries: true});
+            }
+            else
+            {
+                new Chartist.Bar('.chart_' + key, {
+                    labels: ['Monday'],
+                    series: [
+                        [5],
+                        [3]
+                    ]
+                }, {
+                    seriesBarDistance: 10,
+                    reverseData: true,
+                    horizontalBars: true,
+                    axisY: {
+                        offset: 70
+                    }
+                });
+
+            }
+        });
+    </script>#}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container message-page">
+
+        <div class="message-page_image">
+            <img src="{{ asset('assets/img/emoji/128x128/' ~ emoji ~ '.png') }}">
+        </div>
+
+        <div class="message-page_text">
+            <h4 class="message-text_title">{{ title }}</h4>
+            <p class="message-text_description">{{ description }}{% if showHomepageLink %}<br><a href="{{ path('homepage') }}">На главную</a>{% endif %}</p>
+        </div>
+
+    </div>
+
+{% endblock %}

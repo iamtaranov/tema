@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container card">
+
+        <div class="header">
+
+            <h1 class="header_title">Тема</h1> <span class="header_subtitle">простые опросы</span>
+
+        </div>
+
+        {% include 'block/nav.html.twig' %}
+
+        <div class="survey-list">
+
+            <h2 class="survey-list_title">Мои опросы</h2>
+
+            <ul class="survey-list_wrapper">
+
+                {% for survey in surveys %}
+
+                    <li class="survey-list_item">
+                        <h4 class="survey-item_title">
+                            <a href="{{ path('survey_page', {'key': survey.id}) }}">{{ survey.title }}</a>
+                        </h4>
+                        <ul class="survey-item_actions list-inline">
+                            <li class="survey_action">
+                                <a href="{{ path('user_survey_edit', {'key': survey.id}) }}">
+                                    <img src="{{ asset('/assets/img/emoji/64x64/270f.png') }}" alt="Edit">
+                                </a>
+                            </li>
+                            <li class="survey_action">
+                                <a href="{{ path('user_survey_statistic', {'key': survey.id}) }}">
+                                    <img src="{{ asset('/assets/img/emoji/64x64/1f4ca.png') }}" alt="Statistic">
+                                </a>
+                            </li>
+                            <li class="survey_action">
+                                <a href="{{ path('user_survey_answers', {'key': survey.id}) }}">
+                                    <img src="{{ asset('/assets/img/emoji/64x64/1f4cb.png') }}" alt="Answers">
+                                </a>
+                            </li>
+                            <li class="survey_action">
+                                <a href="{{ path('user_survey_close', {'key': survey.id}) }}">
+                                    {% if survey.closed %}
+                                        <img src="{{ asset('/assets/img/emoji/64x64/1f512.png') }}" alt="Unlock">
+                                    {% else %}
+                                        <img src="{{ asset('/assets/img/emoji/64x64/1f513.png') }}" alt="Lock">
+                                    {% endif %}
+                                </a>
+                            </li>
+                            {#<li class="survey_action">
+                                <a href="{{ path('user_survey_delete', {'key': survey.id}) }}">
+                                    <img src="{{ asset('/assets/img/emoji/64x64/1f5d1.png') }}" alt="Delete">
+                                </a>
+                            </li>#}
+                        </ul>
+                        <p class="survey-item_subtitle">{{ survey.description }}</p>
+                    </li>
+
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </div>
+{% endblock %}

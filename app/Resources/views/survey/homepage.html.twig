@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container card">
+
+        <div class="header">
+
+            <h1 class="header_title">Тема</h1> <span class="header_subtitle">простые опросы</span>
+
+        </div>
+
+        {% include 'block/nav.html.twig' %}
+
+        <div class="survey-list">
+
+            <h2 class="survey-list_title">Последние опросы</h2>
+
+            <ul class="survey-list_wrapper">
+
+                {% for survey in surveys %}
+
+                <li class="survey-list_item">
+                    <a href="{{ path('survey_page', {'key': survey.id}) }}">
+                        <h4 class="survey-item_title">{{ survey.title }}</h4>
+                        <p class="survey-item_subtitle">{{ survey.description }}</p>
+                    </a>
+                </li>
+
+                {% endfor %}
+            </ul>
+
+            {#<button class="survey-list_load-more btn btn-round">Загрузить ещё</button>#}
+
+        </div>
+
+    </div>
+{% endblock %}

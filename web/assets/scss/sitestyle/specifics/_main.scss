@@ -1,0 +1,23 @@
+
+// login page
+
+.card-login_title {
+	margin-top: 0;
+	text-align: center;
+}
+
+.card-login_special-links {
+	margin-top: -.75rem;
+	margin-bottom: 0;
+	font-size: 14px;
+	text-align: center;
+}
+
+@media (max-width: $grid-breakpoints-sm + px) {
+
+	body {
+		padding-top: 0;
+		padding-bottom: 0;
+		background: #fff;
+	}
+}

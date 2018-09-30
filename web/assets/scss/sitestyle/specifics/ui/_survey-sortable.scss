@@ -1,0 +1,105 @@
+
+.survey-editor_sortable {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	padding-left: 0;
+	list-style: none;
+
+	& + .survey-editor_sortable {
+		display: none;
+	}
+
+	&:empty {
+
+		& + .survey-editor_sortable {
+			padding: 15px 0;
+			text-align: center;
+			display: block;
+		}
+	}
+
+	.item {
+		background: #fff;
+
+		.form-group {
+			position: relative;
+			overflow: hidden;
+
+			& > ol {
+				margin-bottom: .5rem;
+
+				li {
+					margin-top: .25rem;
+					margin-bottom: .25rem;
+					position: relative;
+
+					.btn_delete-item {
+						top: 4px;
+					}
+				}
+			}
+
+			.form-control {
+				background: transparent;
+			}
+
+			.btn_delete-item {
+				padding: .7rem;
+				display: block;
+				cursor: pointer;
+				position: absolute;
+				top: 0;
+				right: -25px;
+				transition: right .2s ease;
+				background: url("../img/emoji/64x64/2716.png") no-repeat center, transparent;
+				background-size: 1rem;
+			}
+
+			&:hover {
+
+				.btn_delete-item {
+					right: 0;
+				}
+			}
+		}
+
+		&.sortable-ghost {
+			background-color: #eee;
+		}
+	}
+
+	.item_required {
+		margin-top: 0;
+		margin-left: 1rem;
+		padding-left: 1.5rem;
+		display: inline-block;
+
+		.mark {
+			width: 1rem;
+			height: 1rem;
+			top: 1px;
+
+			&:after {
+				//width: .3rem;
+				//height: .75rem;
+				//top: 0;
+				width: .25rem;
+				height: .7rem;
+				top: 4%;
+				left: 36%;
+			}
+		}
+	}
+
+	.btn_create-item {
+		margin-left: 1.5rem;
+		margin-bottom: 0;
+		font-size: 13px;
+		color: $color-main-light;
+		cursor: pointer;
+
+		&:hover {
+			color: $primary-color-dark;
+		}
+	}
+}

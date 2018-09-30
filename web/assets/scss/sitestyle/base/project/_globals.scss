@@ -1,0 +1,77 @@
+
+*,
+:before,
+:after {
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	font-size: 100%;
+}
+
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: $color-main;
+	@include fontSize(16);
+	font-weight: 400;
+	font-family: $base-font-family;
+	line-height: $base-line-height;
+	background: $background-main;
+
+	&.overflow-hidden {
+		overflow: hidden;
+		//visibility: hidden; // fuck iPhone
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-top: 0.75em;
+	margin-bottom: .5em;
+	font-weight: 500;
+	font-family: $headings-font-family;
+	line-height: $headings-line-height;
+}
+
+h1 {
+	margin-top: .5em;
+	@include fontSize($h1-font-size);
+}
+h2 { @include fontSize($h2-font-size); }
+h3 { @include fontSize($h3-font-size); }
+h4 { @include fontSize($h4-font-size); }
+h5 { @include fontSize($h5-font-size); }
+h6 { @include fontSize($h6-font-size); }
+
+
+p {
+	margin-bottom: 1rem;
+}
+
+a {
+	color: $primary-color;
+	//border-bottom: 1px dotted;
+
+
+	&:hover,
+	&:active {
+		color: $primary-color-dark;
+	}
+}
+
+//
+
+.document-loading {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+}
