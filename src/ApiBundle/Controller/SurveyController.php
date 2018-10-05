@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\Survey;
 use AppBundle\Entity\SurveyResponse;
 
+use Endroid\QrCode\QrCode;
+
 /**
  * Class MainController
  * @package ApiBundle\Controller
@@ -45,6 +47,37 @@ class SurveyController extends Controller
         return new JsonResponse([
             'surveys' => $response
         ]);
+    }
+
+    /**
+     * @Route("/qr/{key}", name="api_survey_get_qr_code")
+     *
+     * @param $key
+     * @return Response
+     * @throws \Endroid\QrCode\Exception\InvalidWriterException
+     */
+    public function getSurveyQrCode($key)
+    {
+        $qrCode = new QrCode('https://tema.co.ua/s/' . $key);
+        $qrCode->setMargin(0);
+
+        if (!empty($_GET['size']))
+        {
+            if (is_numeric($_GET['size']))
+            {
+                $size = intval($_GET['size']);
+
+                if ($size >= 64 && $size <= 512)
+                {
+                    $qrCode->setSize($size);
+                }
+            }
+        }
+
+        $response = new Response($qrCode->writeString());
+        $response->headers->set('Content-Type', $qrCode->getContentType());
+
+        return $response;
     }
 
 	/**
