@@ -22,4 +22,9 @@ class MainController extends Controller
             'timestamp' => time()
         ]);
     }
+
+    /**
+     * @Route("/test", name="api_test")
+     */
+    public function test() { }
 }
