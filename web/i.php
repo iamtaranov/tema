@@ -1,8 +1,3 @@
 <?php
 
-class Survey
-{
-
-
-
-}
+echo 'hello world!';

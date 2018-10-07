@@ -17,9 +17,6 @@ use AppBundle\Form\Task\UserTask;
 class SecurityController extends Controller
 {
     /**
-     * @param Request $request
-     * @return Response
-     *
      * @Route("/user/login", name="user_login")
      */
     public function userLoginAction(Request $request)
@@ -33,8 +30,6 @@ class SecurityController extends Controller
     }
 
     /**
-     * @throws \Exception
-     *
      * @Route("/user/logout", name="user_logout")
      */
     public function userLogoutAction()
@@ -43,12 +38,9 @@ class SecurityController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     *
      * @Route("/user/registration", name="user_registration")
      */
-    public function registrationAction(Request $request)
+    public function userRegistrationAction(Request $request)
     {
         $user = new User();
         $form = $this->createForm(UserTask::class, $user);
@@ -71,5 +63,13 @@ class SecurityController extends Controller
         return $this->render('user/security/registration.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/user/remind", name="user_remind")
+     */
+    public function userRemindAction()
+    {
+        throw new \Exception('<a href="/">homepage</a>');
     }
 }

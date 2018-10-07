@@ -87,7 +87,7 @@ class SurveyEditorController extends Controller
 
 		$task = $request->request->get('form');
 
-		if (empty($task) === FALSE)
+		if (empty($task) === false)
 		{
 			$survey->setTitle($task['title'])
 				->setDescription($task['description'])

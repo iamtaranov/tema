@@ -22,12 +22,10 @@ class SurveyController extends Controller
 {
     /**
      * @Route("/", name="api_survey_homepage")
-	 *
-	 * @return JsonResponse
      */
     public function surveyHomepageAction()
     {
-        $offset = (empty($_GET['offset']) !== TRUE && is_int($_GET['offset'])) ? $_GET['offset'] : 0;
+        $offset = (empty($_GET['offset']) !== true && is_int($_GET['offset'])) ? $_GET['offset'] : 0;
 
         $surveys = $this->getDoctrine()->getRepository(Survey::class)
             ->findBy(
@@ -51,10 +49,6 @@ class SurveyController extends Controller
 
     /**
      * @Route("/qr/{key}", name="api_survey_get_qr_code")
-     *
-     * @param $key
-     * @return Response
-     * @throws \Endroid\QrCode\Exception\InvalidWriterException
      */
     public function getSurveyQrCode($key)
     {
@@ -82,9 +76,6 @@ class SurveyController extends Controller
 
 	/**
 	 * @Route("/{key}", name="api_survey_get_by_key")
-	 *
-	 * @param $key
-	 * @return JsonResponse
 	 */
     public function getSurveyByKeyAction($key)
     {
@@ -98,7 +89,7 @@ class SurveyController extends Controller
 
         foreach ($questions as $id => $question)
         {
-            if (empty($question['options']) != TRUE)
+            if (empty($question['options']) != true)
             {
                 $options = array();
 
@@ -125,9 +116,6 @@ class SurveyController extends Controller
 
 	/**
 	 * @Route("/response/{key}", name="api_survey_post_new_response")
-	 *
-	 * @param $key
-	 * @return JsonResponse
 	 */
     public function postNewSurveyResponseAction($key)
 	{

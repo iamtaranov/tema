@@ -23,7 +23,7 @@ class TemplateController extends Controller
      */
     public function getTemplateAction($type)
     {
-        if (Survey::isAllowedEditorTypeString($type) === FALSE)
+        if (Survey::isAllowedEditorTypeString($type) === false)
         {
             return new JsonResponse([
                 'messages' => 'Template type "'. $type .'" search not found'

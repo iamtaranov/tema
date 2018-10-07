@@ -65,7 +65,7 @@ class UserController extends Controller
 
             $time = $response->getPublished()->format('d.m.y');
 
-            if (isset($statistics['general']['times'][$time]) == FALSE)
+            if (isset($statistics['general']['times'][$time]) == false)
             {
                 $statistics['general']['times'][$time] = 0;
             }
@@ -80,7 +80,7 @@ class UserController extends Controller
 
                 $statistic = &$statistics['detailed'][$id];
 
-                if (isset($statistic) === FALSE)
+                if (isset($statistic) === false)
                 {
                     $statistic = [
                         'title' => $question['title'],
