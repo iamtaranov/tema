@@ -484,11 +484,14 @@ class Survey
      */
     public function addOptionToSelectable($key, $option)
 	{
-		// check type
 		$question = $this->getQuestion($key);
-		// check is set
 
-		if (isset($question['options']) == FALSE)
+		if ($this->isSelectableType($question['type']) == false)
+        {
+            return null;
+        }
+
+		if (isset($question['options']) == false)
 		{
 			$question['options'] = array();
 		}
@@ -520,7 +523,7 @@ class Survey
 	{
 		$question = $this->getQuestion($key);
 
-		if (isset($question['options']) == FALSE)
+		if (isset($question['options']) == false)
 		{
 			$question['options'] = array();
 		}
@@ -588,7 +591,7 @@ class Survey
     {
         $options = $this->getQuestionOptions($questionKey);
 
-        if (isset($options) === FALSE)
+        if (isset($options) === false)
         {
             return null;
         }
