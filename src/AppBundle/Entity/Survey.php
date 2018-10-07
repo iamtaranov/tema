@@ -189,6 +189,8 @@ class Survey
     }
 
 	/**
+     * DON'T USE THIS METHOD
+     *
 	 * @return int
 	 */
     public function getTimestamp()
@@ -206,7 +208,7 @@ class Survey
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = trim($title);
 
         return $this;
     }
@@ -217,7 +219,7 @@ class Survey
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = trim($description);
 
         return $this;
     }
@@ -281,9 +283,8 @@ class Survey
 		return in_array($type, [
 			self::TYPE_QUESTION_TEXT_SHORT_STRING,
 			self::TYPE_QUESTION_TEXT_LONG_STRING
-		]) || (is_a($type, self::TYPE_QUESTION_TEXT_SHORT_CLASS)
-				||
-				is_a($type, self::TYPE_QUESTION_TEXT_LONG_CLASS));
+		])  || is_a($type, self::TYPE_QUESTION_TEXT_SHORT_CLASS)
+            || is_a($type, self::TYPE_QUESTION_TEXT_LONG_CLASS);
 	}
 
 	/**
@@ -416,13 +417,23 @@ class Survey
 	 */
 	public static function isAllowedEditorType($type)
 	{
-		return in_array(strtolower($type), [
+        $type = strtolower($type);
 
-		]);
+		return in_array($type, [
+            self::TYPE_QUESTION_TEXT_LONG_STRING,
+            self::TYPE_QUESTION_TEXT_SHORT_STRING,
+            self::TYPE_QUESTION_SELECTABLE_SINGLE_STRING,
+            self::TYPE_QUESTION_SELECTABLE_MULTIPLE_STRING,
+            self::TYPE_QUESTION_SELECTABLE_COLLAPSED_STRING,
+            self::TYPE_EDITOR_SELECTABLE_ITEM_STRING
+		])  || is_a($type, self::TYPE_EDITOR_TEXT_CLASS)
+            || is_a($type, self::TYPE_QUESTION_SELECTABLE_CLASS)
+            || is_a($type, self::TYPE_EDITOR_SELECTABLE_ITEM_CLASS);
 	}
 
     /**
      * @return string
+     * @throws \Exception
      */
     public static function generateKey()
     {
@@ -439,19 +450,20 @@ class Survey
         return $this;
     }
 
-	/**
-	 * @param $title
-	 * @param $type
-	 * @param $required
-	 * @param array $params
-	 * @return mixed|string
-	 */
+    /**
+     * @param $title
+     * @param $type
+     * @param $required
+     * @param array $params
+     * @return mixed|string
+     * @throws \Exception
+     */
     public function addQuestion($title, $type, $required, array $params)
     {
         $key = empty($params['key']) ? $this->generateKey() : $params['key'];
 
         $this->questions[$key] = [
-			'title' => $title,
+			'title' => trim($title),
 			'type' => $type,
 			'required' => $required
 		];
@@ -464,11 +476,12 @@ class Survey
 		return $key;
     }
 
-	/**
-	 * @param $key
-	 * @param $option
-	 * @return mixed
-	 */
+    /**
+     * @param $key
+     * @param $option
+     * @return mixed
+     * @throws \Exception
+     */
     public function addOptionToSelectable($key, $option)
 	{
 		// check type
@@ -480,18 +493,19 @@ class Survey
 			$question['options'] = array();
 		}
 
-		$question['options'][$this->generateKey()] = $option;
+		$question['options'][$this->generateKey()] = trim($option);
 
 		$this->questions[$key] = $question;
 
 		return $key;
 	}
 
-	/**
-	 * @param $key
-	 * @param array $options
-	 * @return mixed
-	 */
+    /**
+     * @param $key
+     * @param array $options
+     * @return mixed
+     * @throws \Exception
+     */
 	public function addOptionsToSelectable($key, array $options)
 	{
 		foreach ($options as $option)
@@ -510,6 +524,11 @@ class Survey
 		{
 			$question['options'] = array();
 		}
+
+		foreach ($option as &$value)
+        {
+            $value = trim($value);
+        }
 
 		$question['options'] = array_merge($question['options'], $option);
 
