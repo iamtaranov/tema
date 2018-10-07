@@ -118,29 +118,4 @@ class SurveyController extends Controller
             'showHomepageLink' => true
         ]);
     }
-
-	/**
-	 * @Route("/test", name="test")
-	 */
-    public function test(Request $request)
-	{
-		$foo = array(
-		    'bar' => array()
-        );
-
-		$bar = &$foo['bar'][0];
-
-        if (isset($bar) === FALSE)
-        {
-            $bar = 'val';
-        }
-        else
-        {
-            $bar = 'var';
-        }
-
-		var_dump($foo);
-
-		exit;
-	}
 }

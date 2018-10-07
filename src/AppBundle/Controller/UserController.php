@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function userHomepageAction(Request $request)
     {
-        return new Response('ok');
+        return new Response('User homepage');
     }
 
     /**
@@ -245,8 +245,5 @@ class UserController extends Controller
     /**
      * @Route("/survey/delete/{key}", name="user_survey_delete", requirements={"key"="\d+"})
      */
-    public function userSurveyDeleteAction($key)
-    {
-
-    }
+    public function userSurveyDeleteAction($key) { }
 }

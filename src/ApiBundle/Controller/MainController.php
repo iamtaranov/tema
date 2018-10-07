@@ -16,15 +16,10 @@ class MainController extends Controller
     public function surveyHomepageAction()
     {
         return new JsonResponse([
-            'status' => 'working',
-            'version' => 'v2',
-            'build' => 'b0818-1',
+            'status' => 'OK',
+            'ver' => 'v2',
+            'rev' => '1',
             'timestamp' => time()
         ]);
     }
-
-    /**
-     * @Route("/test", name="api_test")
-     */
-    public function test() { }
 }

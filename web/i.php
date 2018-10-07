@@ -1,2 +1,8 @@
 <?php
-phpinfo();
+
+class Survey
+{
+
+
+
+}

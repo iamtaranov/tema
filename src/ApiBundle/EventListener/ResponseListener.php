@@ -16,7 +16,7 @@ class ResponseListener
 
                 $response = $event->getResponse();
 
-                $response->setContent(json_encode(json_decode($response->getContent()), JSON_UNESCAPED_UNICODE));
+                $response->setContent(json_encode(json_decode($response->getContent()), JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
 
                 $response->headers->set('Content-Type', 'application/json; charset=UTF-8');
 
